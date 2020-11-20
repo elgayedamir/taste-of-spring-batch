@@ -1,12 +1,10 @@
 # Political Speeches
 
-##Scenario: 
-Implementation of a feature in Java or Scala with subsequent code review and
-productive deployment.
-
-##Objective: 
+## Objective: 
 To process statistics on political speeches.
-##Input: 
+
+## Input: 
+
 CSV files (UTF-8 encoding), which correspond to the following scheme:
 Speaker, topic, date, words
 
@@ -27,7 +25,7 @@ Output: JSON in the following format.
 ```
 If no or no clear answer is possible for a question, this field should be filled with zero
 
-###Example:
+### Example:
 CSV content:
 Speaker, topic, date, words
 Alexander Abel, Education Policy, 2012-10-30, 5310
