@@ -68,8 +68,6 @@ public class StatisticReportCollector implements Collector<Speech, StatisticRepo
 				.map(Entry::getKey)
 				.orElse(StatisticReportConstants.NO_CLEAR_ANSWER);
 			
-			System.out.println("SR from collector -> " + new StatisticReport(mostSpeeches, mostSecurity, leastWordy));
-			
 			return new StatisticReport(mostSpeeches, mostSecurity, leastWordy);
 		};
 	}
