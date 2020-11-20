@@ -1,4 +1,4 @@
-package com.fashiondigital.model;
+package com.elgayed.model;
 
 import java.io.Serializable;
 

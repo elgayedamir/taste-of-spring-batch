@@ -1,4 +1,4 @@
-package com.fashiondigital.processing;
+package com.elgayed.processing;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -33,7 +33,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.validation.BindException;
 
-import com.fashiondigital.model.Speech;
+import com.elgayed.model.Speech;
 
 @Configuration
 @EnableBatchProcessing

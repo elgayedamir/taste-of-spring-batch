@@ -1,4 +1,4 @@
-package com.fashiondigital.statistics;
+package com.elgayed.statistics;
 
 /**
  * Constants for statistic report

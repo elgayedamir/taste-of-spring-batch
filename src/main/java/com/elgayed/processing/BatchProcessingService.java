@@ -1,4 +1,4 @@
-package com.fashiondigital.processing;
+package com.elgayed.processing;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,10 +17,10 @@ import org.springframework.batch.item.file.MultiResourceItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fashiondigital.model.Speech;
-import com.fashiondigital.model.StatisticReport;
-import com.fashiondigital.statistics.StatisticReportCollector;
-import com.fashiondigital.statistics.StatisticReportConstants;
+import com.elgayed.model.Speech;
+import com.elgayed.model.StatisticReport;
+import com.elgayed.statistics.StatisticReportCollector;
+import com.elgayed.statistics.StatisticReportConstants;
 
 @Service
 public class BatchProcessingService {

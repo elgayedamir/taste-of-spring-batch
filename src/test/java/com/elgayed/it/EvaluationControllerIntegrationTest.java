@@ -1,4 +1,4 @@
-package com.fashiondigital.it;
+package com.elgayed.it;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,7 +20,7 @@ import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import com.fashiondigital.model.StatisticReport;
+import com.elgayed.model.StatisticReport;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)

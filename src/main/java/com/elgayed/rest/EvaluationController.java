@@ -1,4 +1,4 @@
-package com.fashiondigital.rest;
+package com.elgayed.rest;
 
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fashiondigital.model.StatisticReport;
-import com.fashiondigital.processing.BatchProcessingService;
+import com.elgayed.model.StatisticReport;
+import com.elgayed.processing.BatchProcessingService;
 
 @RestController
 @RequestMapping(path = "evaluation")

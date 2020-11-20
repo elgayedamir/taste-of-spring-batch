@@ -1,4 +1,4 @@
-package com.fashiondigital.processing;
+package com.elgayed.processing;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;
 
-import com.fashiondigital.model.Speech;
-import com.fashiondigital.model.StatisticReport;
-import com.fashiondigital.statistics.StatisticReportCollector;
+import com.elgayed.model.Speech;
+import com.elgayed.model.StatisticReport;
+import com.elgayed.statistics.StatisticReportCollector;
 
 @Component
 @JobScope

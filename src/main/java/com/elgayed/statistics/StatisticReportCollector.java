@@ -1,4 +1,4 @@
-package com.fashiondigital.statistics;
+package com.elgayed.statistics;
 
 import java.util.Calendar;
 import java.util.Comparator;
@@ -7,8 +7,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Consumer;
 import java.util.stream.Collector;
-import com.fashiondigital.model.Speech;
-import com.fashiondigital.model.StatisticReport;
+
+import com.elgayed.model.Speech;
+import com.elgayed.model.StatisticReport;
 
 /**
  * Collects statistics from a stream of speeches:

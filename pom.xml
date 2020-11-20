@@ -8,10 +8,10 @@
 		<version>2.3.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.fashiondigital.backend</groupId>
+	<groupId>com.elgayed.backend</groupId>
 	<artifactId>political-speeche-statistics</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>political-speeche-statistics</name>
+	<name>Political Speeches Statistic Processor</name>
 	<description>Spring Boot application to process statistics on political speeches derived from CSV files</description>
 
 	<properties>

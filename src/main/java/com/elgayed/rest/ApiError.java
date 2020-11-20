@@ -1,4 +1,4 @@
-package com.fashiondigital.rest;
+package com.elgayed.rest;
 
 /**
  * This class serves as a DTO for errors returned by the REST API end-points 
