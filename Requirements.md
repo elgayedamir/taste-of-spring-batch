@@ -27,8 +27,9 @@ If no or no clear answer is possible for a question, this field should be filled
 
 ### Example:
 CSV content:
-Speaker, topic, date, words
-Alexander Abel, Education Policy, 2012-10-30, 5310
-Bernhard Belling, Coal Subsidies, 2012-11-05, 1210
-Caesare Collins, Coal Subsidies, 2012-11-06, 1119
+
+Speaker, topic, date, words  
+Alexander Abel, Education Policy, 2012-10-30, 5310  
+Bernhard Belling, Coal Subsidies, 2012-11-05, 1210  
+Caesare Collins, Coal Subsidies, 2012-11-06, 1119  
 Alexander Abel, Internal Security, 2012-12-11, 911
