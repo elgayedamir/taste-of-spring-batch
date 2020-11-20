@@ -29,7 +29,7 @@ public class StatisticReportWriter implements ItemWriter<Speech> {
 	@Override
 	public void write(List<? extends Speech> items) throws Exception {
 		//Collects StatisticReport using StatisticReportCollector
-		StatisticReport statisticReport = items.stream().collect(StatisticReportCollector.newCollector());
+		StatisticReport statisticReport = items.stream().collect(new StatisticReportCollector());
 		jobExecution.getExecutionContext().put(STATISTIC_REPORT_KEY, statisticReport);
 	}
 }
