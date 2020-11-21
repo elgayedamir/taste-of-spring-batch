@@ -46,7 +46,7 @@ public class StatisticReportCollector implements Collector<Speech, StatisticRepo
 	@Override
 	public Function<StatisticReportAccumulator, StatisticReport> finisher() {
 		return accumulator -> {
-			//TODO update each of these fields in the accumulator each time and item is accepted
+			//TODO update each of these fields in the accumulator each time when item is accepted
 			String leastWordy = accumulator.getWordsPerSpeaker()
 					.entrySet()
 					.stream()

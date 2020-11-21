@@ -3,6 +3,7 @@ package com.elgayed.processing;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
@@ -51,12 +52,14 @@ public class BatchProcessingConfiguration {
 				Map<String, JobParameter> paramsMap = parameters.getParameters();
 				if (paramsMap.isEmpty())
 					throw new JobParametersInvalidException("At least one url should be provided");
-				for (Entry<String, JobParameter> entry : paramsMap.entrySet()) {
-					try {
-						new URL(entry.getValue().toString());
-					} catch (MalformedURLException e) {
-						throw new JobParametersInvalidException(String.format("The following URL '%s' is not valid", entry.getValue()));
-					}
+				List<String> invalidUrls = paramsMap.entrySet().stream()
+					.map(Entry::getValue)
+					.map(Objects::toString)
+					//returns invalid urls
+					.filter(value -> {try {new URL(value);return false;} catch (MalformedURLException e) {return true;}})
+					.collect(Collectors.toList());
+				if (!invalidUrls.isEmpty()) {
+					throw new JobParametersInvalidException(String.format("The following URLs are not valid: %s", String.join(", ", invalidUrls)));
 				}
 			}
 		};

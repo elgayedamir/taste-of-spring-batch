@@ -53,18 +53,18 @@ public class StatisticReportAccumulator {
 		updateWordsPerSpeeker(speech);
 	}
 	
-	public void updateWordsPerSpeeker (Speech speech) {
+	private void updateWordsPerSpeeker (Speech speech) {
 		wordsPerSpeaker.merge(speech.getSpeaker(), speech.getWords(), Long::sum);
 	}
 	
-	public void updateSpeechIn2013PerSpeeker (Speech speech) {
+	private void updateSpeechIn2013PerSpeeker (Speech speech) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(speech.getDate());
 		if ( calendar.get(Calendar.YEAR) == StatisticReportConstants.MOST_SPEECHES_YEAR)
 			speechesIn2013PerSpeaker.merge(speech.getSpeaker(), Long.valueOf(1), Long::sum);
 	}
 	
-	public void updateInternalSecuritySpeechesPerSpeeker (Speech speech) {
+	private void updateInternalSecuritySpeechesPerSpeeker (Speech speech) {
 		if (StatisticReportConstants.INTERNAL_SECURITY_THEME.equals(speech.getTheme()))
 			internalSecuritySpeechesPerSpeaker.merge(speech.getSpeaker(), Long.valueOf(1), Long::sum);
 	}

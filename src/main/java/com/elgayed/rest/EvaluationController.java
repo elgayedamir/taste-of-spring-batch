@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
@@ -41,8 +42,10 @@ public class EvaluationController {
 		JobInstanceAlreadyCompleteException, 
 		JobParametersInvalidException {
 		
+		//Filter query params: only pramas that the key patches url{index}, e.g. url1, url2,...,url{n}, and that they value is not blank
 		final Map<String, String> csvFileUrls = queryParams.entrySet().stream()
 					.filter(entry -> QUERY_PARAM_URLS_PATTERN.matcher(entry.getKey()).matches())
+					.filter(entry -> StringUtils.isNotBlank(entry.getValue()))
 					.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 		
 		StatisticReport statisticReport = batchProcessingService.processCsvFiles(csvFileUrls);
