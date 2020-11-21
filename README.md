@@ -4,8 +4,8 @@
 Get familiar with Spring Batch core concepts, patterns and architecture.
 
 ## Overview
-This application exposes a rest end-point that accepts one or more CSV file URLs containing data about political speeches (All files have the same data format).
-After loading the files, statistics about the political speeches are extracted and returned as response.
+This application exposes a rest end-point that accepts one or more CSV file URLs containing data about political speeches (All files have the same data format).  
+After loading the files, statistics about the political speeches are extracted and returned as response.  
 For more details, check [Requirements.md](./Requirements.md)
 
 
