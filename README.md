@@ -14,14 +14,14 @@ For more details, check [Requirements.md](./Requirements.md)
 Running the following maven command builds the spring boot application and generates an uber JAR
 
 ```
-mvn clean package
+./mvnw clean package
 ```
 
 ## Run
 * Using Maven
   
 ```
-spring-boot:run
+./mvnw spring-boot:run
 ```
 
 * Running JAR after running build command (form <b>Build</b> section)
