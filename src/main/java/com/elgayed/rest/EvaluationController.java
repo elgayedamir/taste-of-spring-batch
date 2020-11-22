@@ -42,7 +42,7 @@ public class EvaluationController {
 		JobInstanceAlreadyCompleteException, 
 		JobParametersInvalidException {
 		
-		//Filter query params: only pramas that the key patches url{index}, e.g. url1, url2,...,url{n}, and that they value is not blank
+		//Filter query params: only pramas that the key patches url{index}, e.g. url1, url2,...,url{n}, and the value is not blank
 		final Map<String, String> csvFileUrls = queryParams.entrySet().stream()
 					.filter(entry -> QUERY_PARAM_URLS_PATTERN.matcher(entry.getKey()).matches())
 					.filter(entry -> StringUtils.isNotBlank(entry.getValue()))

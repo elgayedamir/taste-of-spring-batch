@@ -3,10 +3,12 @@ package com.elgayed.statistics;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import com.elgayed.model.Speech;
+import com.elgayed.model.StatisticReport;
 
-public class StatisticReportAccumulator {
+public class StatisticsReportAccumulator {
 	
 	//TODO is concurrent map required if this is used in a // stream
 	/**
@@ -34,6 +36,10 @@ public class StatisticReportAccumulator {
 	 */
 	private Map<String, Long> internalSecuritySpeechesPerSpeaker = new HashMap<>();
 	
+	private Optional<String> leastWordySpeaker = Optional.empty();
+	private Optional<String> speakerWithMostSpeechesIn2013 = Optional.empty();
+	private Optional<String> speakerWithMostSecuritySpeeches = Optional.empty();
+	
 	
 	public Map<String, Long> getWordsPerSpeaker() {
 		return wordsPerSpeaker;
@@ -55,19 +61,52 @@ public class StatisticReportAccumulator {
 	
 	private void updateWordsPerSpeeker (Speech speech) {
 		Long mergedValue = wordsPerSpeaker.merge(speech.getSpeaker(), speech.getWords(), Long::sum);
+		leastWordySpeaker.ifPresentOrElse(
+				speaker -> {
+					Long totalWords = wordsPerSpeaker.get(speaker);
+					if (mergedValue <= totalWords) leastWordySpeaker = Optional.of(speech.getSpeaker());
+				},
+				() -> {
+					leastWordySpeaker = Optional.of(speech.getSpeaker());
+				});
 	}
 	
 	private void updateSpeechIn2013PerSpeeker (Speech speech) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(speech.getDate());
-		if ( calendar.get(Calendar.YEAR) == StatisticReportConstants.MOST_SPEECHES_YEAR) {
+		if ( calendar.get(Calendar.YEAR) == StatisticsReportConstants.MOST_SPEECHES_YEAR) {
 			Long mergedValue = speechesIn2013PerSpeaker.merge(speech.getSpeaker(), Long.valueOf(1), Long::sum);
+			speakerWithMostSpeechesIn2013.ifPresentOrElse(
+					speaker -> {
+						Long totalSpeechesIn2013 = speechesIn2013PerSpeaker.get(speaker);
+						if (mergedValue >= totalSpeechesIn2013) speakerWithMostSpeechesIn2013 = Optional.of(speech.getSpeaker());
+					},
+					() -> {
+						speakerWithMostSpeechesIn2013 = Optional.of(speech.getSpeaker());
+					});
 		}	
 	}
 	
 	private void updateInternalSecuritySpeechesPerSpeeker (Speech speech) {
-		if (StatisticReportConstants.INTERNAL_SECURITY_THEME.equals(speech.getTheme())) {
+		if (StatisticsReportConstants.INTERNAL_SECURITY_THEME.equals(speech.getTheme())) {
 			Long mergedValue = internalSecuritySpeechesPerSpeaker.merge(speech.getSpeaker(), Long.valueOf(1), Long::sum);
+			speakerWithMostSecuritySpeeches.ifPresentOrElse(
+					speaker -> {
+						Long totalSecuritySpeeches = internalSecuritySpeechesPerSpeaker.get(speaker);
+						if (mergedValue >= totalSecuritySpeeches) speakerWithMostSecuritySpeeches = Optional.of(speech.getSpeaker());
+					},
+					() -> {
+						speakerWithMostSecuritySpeeches = Optional.of(speech.getSpeaker());
+					});
 		}
 	}
+	
+	public StatisticReport toStatisticReport () {
+		return new StatisticReport(
+				speakerWithMostSpeechesIn2013.orElse(StatisticsReportConstants.NO_CLEAR_ANSWER), 
+				speakerWithMostSecuritySpeeches.orElse(StatisticsReportConstants.NO_CLEAR_ANSWER),
+				leastWordySpeaker.orElse(StatisticsReportConstants.NO_CLEAR_ANSWER));
+		
+	}
+	
 }

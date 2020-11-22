@@ -2,6 +2,7 @@ package com.elgayed.model;
 
 import java.util.Date;
 
+//TODO add validation: https://stackoverflow.com/questions/58249060/validate-field-length-while-reading-csv-file-in-spring-batch
 public class Speech {
 	
 	private String speaker;

@@ -19,8 +19,7 @@ import org.springframework.stereotype.Service;
 
 import com.elgayed.model.Speech;
 import com.elgayed.model.StatisticReport;
-import com.elgayed.statistics.StatisticReportCollector;
-import com.elgayed.statistics.StatisticReportConstants;
+import com.elgayed.statistics.StatisticsReportConstants;
 
 @Service
 public class BatchProcessingService {
@@ -49,7 +48,7 @@ public class BatchProcessingService {
 		JobExecution jobExecution = jobLauncher.run(job, jobParams);
 		StatisticReport statisticReport = (StatisticReport) jobExecution.getExecutionContext().get(StatisticReportWriter.STATISTIC_REPORT_KEY);
 		if (statisticReport == null)
-			statisticReport = new StatisticReport(StatisticReportConstants.NO_CLEAR_ANSWER, StatisticReportConstants.NO_CLEAR_ANSWER, StatisticReportConstants.NO_CLEAR_ANSWER);
+			statisticReport = new StatisticReport(StatisticsReportConstants.NO_CLEAR_ANSWER, StatisticsReportConstants.NO_CLEAR_ANSWER, StatisticsReportConstants.NO_CLEAR_ANSWER);
 		return statisticReport;
 	}
 }

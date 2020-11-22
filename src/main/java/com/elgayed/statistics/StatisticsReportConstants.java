@@ -3,7 +3,7 @@ package com.elgayed.statistics;
 /**
  * Constants for statistic report
  */
-public class StatisticReportConstants {
+public class StatisticsReportConstants {
 	
 	public static final String INTERNAL_SECURITY_THEME = "Innere Sicherheit";
 	public static final int MOST_SPEECHES_YEAR = 2013;
