@@ -101,9 +101,10 @@ public class BatchProcessingConfiguration {
 		resourceItemReader.setResources(
 				csvUrls.entrySet().stream()
 					.map(Entry::getValue)
-					.map(t -> {
+					.map(csvUrl -> {
 						try {
-							return new UrlResource(t);
+							return new UrlResource(csvUrl);
+						// this exception should never be thrown since JobParametersValidator guarantees that URLs will be valid at this point
 						} catch (MalformedURLException e) {
 							return null;
 						}

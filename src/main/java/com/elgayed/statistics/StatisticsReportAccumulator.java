@@ -13,7 +13,6 @@ import com.elgayed.model.StatisticsReport;
 
 public class StatisticsReportAccumulator {
 	
-	//TODO is concurrent map required if this is used in a // stream
 	/**
 	 * Map for accumulating words per speaker
 	 * <ul>
@@ -82,14 +81,14 @@ public class StatisticsReportAccumulator {
 //		updateLeastWordySpeaker(speakerUpdatedWordsCount.getLeft(), speakerUpdatedWordsCount.getRight());
 		updateLeastWordyFunction.apply(speech);
 	}
-
 	
 /*
  * For the sake of experimentation: 
- * Implementation of updating leastWordy in a functional style: 
+ * Implementing the update of leastWordy in a functional style: 
  * A composed function that updates wordsPerSpeakerMap then updates leastWordy field 
  * 
- * This functions do have side effects (updating object level variables) so it might be debatable to keep 
+ * This function is not pure: it neither have the same return value for the same input and 
+ * it does have side effects (updating object level variables) so it might be debatable to keep 
  * the implementation in OOP paradigm via message passing (method invocation in java)
  * like for updating speakerWithMostSpeechesIn2013 and speakerWithMostSecuritySpeeches
  */
@@ -120,6 +119,7 @@ public class StatisticsReportAccumulator {
 	 * @param speech Speech Object
 	 * @return a {@link Pair} holding in left the speaker's name and in right his total words count
 	 */
+	@SuppressWarnings("unused")
 	private Pair<String, Long> updateWordsPerSpeeker (Speech speech) {
 		String speaker = speech.getSpeaker();
 		Long mergedValue = wordsPerSpeaker.merge(speaker, speech.getWords(), Long::sum);
@@ -132,6 +132,7 @@ public class StatisticsReportAccumulator {
 	 * @param speaker Speaker's name
 	 * @param wordsCount Speaker's total words count
 	 */
+	@SuppressWarnings("unused")
 	private void updateLeastWordySpeaker (String speaker, Long wordsCount) {
 		leastWordySpeaker.ifPresentOrElse(
 				currentLeastWordy -> {

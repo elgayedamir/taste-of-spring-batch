@@ -35,7 +35,7 @@ public class StatisticsReportCollector implements Collector<Speech, StatisticsRe
 	}
 	
 	//TODO if this collector is to be used in a parallel stream this implementation should be changed
-	//to merge accumulation maps from two different instants
+	//to merge accumulation maps from two different instants and accumulator should use ConcurentHashMaps
 	@Override
 	public BinaryOperator<StatisticsReportAccumulator> combiner() {
 		return (accumulator, other) -> accumulator;
