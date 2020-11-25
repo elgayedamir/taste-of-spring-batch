@@ -10,7 +10,7 @@ import java.io.Serializable;
  * <li>The speaker with most speeches about internal security</li>
  * </ul>
  */
-public class StatisticReport implements Serializable{
+public class StatisticsReport implements Serializable{
 	
 	private static final long serialVersionUID = 4876172865021316130L;
 	
@@ -18,7 +18,7 @@ public class StatisticReport implements Serializable{
 	private String mostSecurity;
 	private String leastWordy;
 	
-	public StatisticReport(String mostSpeeches, String mostSecurity, String leastWordy) {
+	public StatisticsReport(String mostSpeeches, String mostSecurity, String leastWordy) {
 		super();
 		this.mostSpeeches = mostSpeeches;
 		this.mostSecurity = mostSecurity;
@@ -48,7 +48,7 @@ public class StatisticReport implements Serializable{
 
 	@Override
 	public String toString() {
-		return "StatisticReport [mostSpeeches=" + mostSpeeches + ", mostSecurity=" + mostSecurity + ", leastWordy="
+		return "StatisticsReport [mostSpeeches=" + mostSpeeches + ", mostSecurity=" + mostSecurity + ", leastWordy="
 				+ leastWordy + "]";
 	}
 }

@@ -3,7 +3,6 @@ package com.elgayed.processing;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.springframework.aop.ThrowsAdvice;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameter;
@@ -19,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.elgayed.model.Speech;
-import com.elgayed.model.StatisticReport;
+import com.elgayed.model.StatisticsReport;
 import com.elgayed.statistics.StatisticsReportCollector;
 import com.elgayed.statistics.StatisticsReportConstants;
 
@@ -36,26 +35,26 @@ public class BatchProcessingService {
 	 * The batch processing job has one step: 
 	 * <ol>
 	 * <li>Item reader: Reads all CSV Files using a {@link MultiResourceItemReader} (delegates reading each CSV file to a {@link FlatFileItemWriter}) and produces a {@link Speech} per line
-	 * <li>Item writer: streams speeches and uses {@link StatisticsReportCollector} to derive a {@link StatisticReport}
+	 * <li>Item writer: streams speeches and uses {@link StatisticsReportCollector} to derive a {@link StatisticsReport}
 	 * </ol>
 	 * @param csvFileUrls URLs of the CSV files to be processed
-	 * @return {@link StatisticReport} containing stats derived from speeches read the given CSV File URLs
+	 * @return {@link StatisticsReport} containing stats derived from speeches read the given CSV File URLs
 	 * 
 	 * @throws JobExecutionAlreadyRunningException
 	 * @throws JobRestartException
 	 * @throws JobInstanceAlreadyCompleteException
 	 * @throws JobParametersInvalidException if {@link JobParameters} are not valid, {@code JobParameters} are validated using {@link BatchProcessingConfiguration#jobParametersValidator()}
 	 */
-	public StatisticReport processCsvFiles (Map<String, String> csvFileUrls) throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
+	public StatisticsReport processCsvFiles (Map<String, String> csvFileUrls) throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
 		JobParameters jobParams = new JobParameters(
 				csvFileUrls.entrySet().stream().collect(
 						Collectors.toMap(Map.Entry::getKey, entry -> new JobParameter(entry.getValue().toString()))
 					)
 		);
 		JobExecution jobExecution = jobLauncher.run(job, jobParams);
-		StatisticReport statisticReport = (StatisticReport) jobExecution.getExecutionContext().get(StatisticReportWriter.STATISTIC_REPORT_KEY);
-		if (statisticReport == null)
-			statisticReport = new StatisticReport(StatisticsReportConstants.NO_CLEAR_ANSWER, StatisticsReportConstants.NO_CLEAR_ANSWER, StatisticsReportConstants.NO_CLEAR_ANSWER);
-		return statisticReport;
+		StatisticsReport statisticsReport = (StatisticsReport) jobExecution.getExecutionContext().get(StatisticReportWriter.STATISTIC_REPORT_KEY);
+		if (statisticsReport == null)
+			statisticsReport = new StatisticsReport(StatisticsReportConstants.NO_CLEAR_ANSWER, StatisticsReportConstants.NO_CLEAR_ANSWER, StatisticsReportConstants.NO_CLEAR_ANSWER);
+		return statisticsReport;
 	}
 }

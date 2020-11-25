@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 
 import com.elgayed.model.Speech;
-import com.elgayed.model.StatisticReport;
+import com.elgayed.model.StatisticsReport;
 
 /**
  * Collects statistics from a stream of speeches:
@@ -19,10 +19,10 @@ import com.elgayed.model.StatisticReport;
  * <li>Speeches about internal security theme per speaker</li>
  * </ul>
  * 
- * This collectors finilizer returns an {@link StatisticReport} instance holding information about:
+ * This collectors finilizer returns an {@link StatisticsReport} instance holding information about:
  * least wordy speaker, the speaker with most speeches in 2013, and the speaker with most speeches about internal security
  */
-public class StatisticsReportCollector implements Collector<Speech, StatisticsReportAccumulator, StatisticReport> {
+public class StatisticsReportCollector implements Collector<Speech, StatisticsReportAccumulator, StatisticsReport> {
 	
 	@Override
 	public Supplier<StatisticsReportAccumulator> supplier() {
@@ -42,8 +42,8 @@ public class StatisticsReportCollector implements Collector<Speech, StatisticsRe
 	}
 
 	@Override
-	public Function<StatisticsReportAccumulator, StatisticReport> finisher() {
-		return StatisticsReportAccumulator::toStatisticReport;
+	public Function<StatisticsReportAccumulator, StatisticsReport> finisher() {
+		return StatisticsReportAccumulator::toStatisticsReport;
 	}
 
 	@Override

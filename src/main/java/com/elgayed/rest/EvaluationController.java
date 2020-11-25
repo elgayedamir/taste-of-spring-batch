@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.elgayed.model.StatisticReport;
+import com.elgayed.model.StatisticsReport;
 import com.elgayed.processing.BatchProcessingService;
 
 @RestController
@@ -36,7 +36,7 @@ public class EvaluationController {
 	
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<StatisticReport> evaluate (@RequestParam final Map<String, String> queryParams) throws 
+	public ResponseEntity<StatisticsReport> evaluate (@RequestParam final Map<String, String> queryParams) throws 
 		JobExecutionAlreadyRunningException, 
 		JobRestartException, 
 		JobInstanceAlreadyCompleteException, 
@@ -48,9 +48,9 @@ public class EvaluationController {
 					.filter(entry -> StringUtils.isNotBlank(entry.getValue()))
 					.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 		
-		StatisticReport statisticReport = batchProcessingService.processCsvFiles(csvFileUrls);
+		StatisticsReport statisticsReport = batchProcessingService.processCsvFiles(csvFileUrls);
 		
-		return new ResponseEntity<StatisticReport>(statisticReport, HttpStatus.OK);
+		return new ResponseEntity<StatisticsReport>(statisticsReport, HttpStatus.OK);
 	}
 	
 	

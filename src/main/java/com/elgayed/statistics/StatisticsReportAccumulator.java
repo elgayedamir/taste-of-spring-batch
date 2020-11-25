@@ -4,12 +4,11 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.elgayed.model.Speech;
-import com.elgayed.model.StatisticReport;
+import com.elgayed.model.StatisticsReport;
 
 public class StatisticsReportAccumulator {
 	
@@ -206,8 +205,8 @@ public class StatisticsReportAccumulator {
 				});
 	}
 	
-	public StatisticReport toStatisticReport () {
-		return new StatisticReport(
+	public StatisticsReport toStatisticsReport () {
+		return new StatisticsReport(
 				speakerWithMostSpeechesIn2013.orElse(StatisticsReportConstants.NO_CLEAR_ANSWER), 
 				speakerWithMostSecuritySpeeches.orElse(StatisticsReportConstants.NO_CLEAR_ANSWER),
 				leastWordySpeaker.orElse(StatisticsReportConstants.NO_CLEAR_ANSWER));

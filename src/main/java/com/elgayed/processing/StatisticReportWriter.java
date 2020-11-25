@@ -10,7 +10,7 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;
 
 import com.elgayed.model.Speech;
-import com.elgayed.model.StatisticReport;
+import com.elgayed.model.StatisticsReport;
 import com.elgayed.statistics.StatisticsReportCollector;
 
 @Component
@@ -28,8 +28,8 @@ public class StatisticReportWriter implements ItemWriter<Speech> {
 	
 	@Override
 	public void write(List<? extends Speech> items) throws Exception {
-		//Collects StatisticReport using StatisticReportCollector
-		StatisticReport statisticReport = items.stream().collect(new StatisticsReportCollector());
-		jobExecution.getExecutionContext().put(STATISTIC_REPORT_KEY, statisticReport);
+		//Collects StatisticsReport using StatisticsReportCollector
+		StatisticsReport statisticsReport = items.stream().collect(new StatisticsReportCollector());
+		jobExecution.getExecutionContext().put(STATISTIC_REPORT_KEY, statisticsReport);
 	}
 }

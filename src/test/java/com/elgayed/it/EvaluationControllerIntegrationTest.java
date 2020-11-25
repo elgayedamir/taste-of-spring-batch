@@ -20,7 +20,7 @@ import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import com.elgayed.model.StatisticReport;
+import com.elgayed.model.StatisticsReport;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -43,9 +43,9 @@ public class EvaluationControllerIntegrationTest {
 	
 	@Test
 	public void evaluationEndpointTest () throws UnsupportedOperationException, IOException, InterruptedException {
-		StatisticReport statisticReport = restTemplate.getForObject(
+		StatisticsReport statisticReport = restTemplate.getForObject(
 				String.format("http://localhost:%d/evaluation?url1=%s", port, getNginxFileUrl("/speeches.csv").toString()),
-				StatisticReport.class);
+				StatisticsReport.class);
 		
 		assertEquals("zero", statisticReport.getMostSpeeches());
 		assertEquals("Alexander Abel", statisticReport.getMostSecurity());
@@ -54,9 +54,9 @@ public class EvaluationControllerIntegrationTest {
 	
 	@Test
 	public void evaluationEndpointWithTwoCSVFilesTest () throws UnsupportedOperationException, IOException, InterruptedException {
-		StatisticReport statisticReport = restTemplate.getForObject(
+		StatisticsReport statisticReport = restTemplate.getForObject(
 				String.format("http://localhost:%d/evaluation?url1=%s&url2=%s", port, getNginxFileUrl("/speeches.csv").toString(), getNginxFileUrl("/speeches1.csv").toString()),
-				StatisticReport.class);
+				StatisticsReport.class);
 		
 		assertEquals("Amir Elgayed", statisticReport.getMostSpeeches());
 		assertEquals("Alexander Abel", statisticReport.getMostSecurity());
