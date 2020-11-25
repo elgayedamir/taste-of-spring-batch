@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -77,38 +78,41 @@ public class StatisticsReportAccumulator {
 				update -> updateSpeakerWithMostSpeechesIn2013(update.getLeft(), update.getRight())
 				);
 		
-		Pair<String, Long> speakerUpdatedWordsCount = updateWordsPerSpeeker(speech);
-		updateLeastWordySpeaker(speakerUpdatedWordsCount.getLeft(), speakerUpdatedWordsCount.getRight());
+//		Pair<String, Long> speakerUpdatedWordsCount = updateWordsPerSpeeker(speech);
+//		updateLeastWordySpeaker(speakerUpdatedWordsCount.getLeft(), speakerUpdatedWordsCount.getRight());
+		updateLeastWordyFunction.apply(speech);
 	}
 
 	
 /*
- * Implementation of updating leastWordy in a functional style: composed function that updates wordsPerSpeakerMap
- * then updates leastWordy field although these functions do have side effects so better keep the implementation
- * in OOP paradigm
+ * For the sake of experimentation: 
+ * Implementation of updating leastWordy in a functional style: 
+ * A composed function that updates wordsPerSpeakerMap then updates leastWordy field 
+ * 
+ * This functions do have side effects (updating object level variables) so it might be debatable to keep 
+ * the implementation in OOP paradigm via message passing (method invocation in java)
+ * like for updating speakerWithMostSpeechesIn2013 and speakerWithMostSecuritySpeeches
  */
-//	private Function<Speech, Pair<String, Long>> updateWordsPerSpeekerFunction = speech -> {
-//			Long mergedValue = wordsPerSpeaker.merge(speech.getSpeaker(), speech.getWords(), Long::sum);
-//			return Pair.of(speech.getSpeaker(), mergedValue);
-//		};
-//	
-//	private Function<Speech, String> updateLeastWordyFunction = updateWordsPerSpeekerFunction.andThen(
-//			updatedWordsCount -> {
-//				String speaker = updatedWordsCount.getLeft();
-//				Long wordsCount = updatedWordsCount.getRight();
-//				leastWordySpeaker.ifPresentOrElse(
-//						currentLeastWordy -> {
-//							//HashMap.get() is on average O(1) so no need to use a Pair 
-//							//to store words count for least wordy speaker
-//							Long currentLeastWordyCount = wordsPerSpeaker.get(currentLeastWordy);
-//							if (wordsCount <= currentLeastWordyCount) leastWordySpeaker = Optional.of(speaker);
-//						},
-//						() -> {
-//							leastWordySpeaker = Optional.of(speaker);
-//						});
-//				return leastWordySpeaker.get();
-//			}
-//		);
+	private Function<Speech, Pair<String, Long>> updateWordsPerSpeekerFunction = speech -> {
+			Long mergedValue = wordsPerSpeaker.merge(speech.getSpeaker(), speech.getWords(), Long::sum);
+			return Pair.of(speech.getSpeaker(), mergedValue);
+		};
+	
+	private Function<Speech, String> updateLeastWordyFunction = updateWordsPerSpeekerFunction.andThen(
+			updatedWordsCount -> {
+				String speaker = updatedWordsCount.getLeft();
+				Long wordsCount = updatedWordsCount.getRight();
+				leastWordySpeaker.ifPresentOrElse(
+						currentLeastWordy -> {
+							Long currentLeastWordyCount = wordsPerSpeaker.get(currentLeastWordy);
+							if (wordsCount <= currentLeastWordyCount) leastWordySpeaker = Optional.of(speaker);
+						},
+						() -> {
+							leastWordySpeaker = Optional.of(speaker);
+						});
+				return leastWordySpeaker.get();
+			}
+		);
 	
 	/**
 	 * Given a speech, this method updates {@link #wordsPerSpeaker} accumulation map, by summing
