@@ -46,7 +46,7 @@ public class DataGenerator {
 	};
 
 	public static final Supplier<String> THEME_SUPPLIER = () -> {
-		return THEMES.stream().skip(new Random().nextInt(SPEAKERS.size())).findFirst().get();
+		return THEMES.stream().skip(new Random().nextInt(THEMES.size())).findFirst().get();
 	};
 	
 	public static final Supplier<Speech> SPEECH_SUPPLIER = () -> {
