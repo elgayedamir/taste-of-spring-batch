@@ -1,5 +1,6 @@
 package com.elgayed.it;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.util.StopWatch;
 import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.NginxContainer;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
@@ -61,6 +63,27 @@ public class EvaluationControllerIntegrationTest {
 		assertEquals("Amir Elgayed", statisticReport.getMostSpeeches());
 		assertEquals("Alexander Abel", statisticReport.getMostSecurity());
 		assertEquals("Amir Elgayed", statisticReport.getLeastWordy());
+	}
+	
+	//Testing a csv file with 10000 entries
+	@Test
+	public void evaluationEndpointWithLargeCSVFileTest () throws UnsupportedOperationException, IOException, InterruptedException {
+		
+		StopWatch watch = new StopWatch();
+		watch.start();
+
+		StatisticsReport statisticReport = restTemplate.getForObject(
+				String.format("http://localhost:%d/evaluation?url1=%s", port, getNginxFileUrl("/large-speeches.csv").toString()),
+				StatisticsReport.class);
+
+		watch.stop();
+		double executionTime = watch.getTotalTimeSeconds();
+		
+		assertEquals("John Doe", statisticReport.getMostSpeeches());
+		assertEquals("John Doe", statisticReport.getMostSecurity());
+		assertEquals("Lee Sin", statisticReport.getLeastWordy());
+		//Assert that processing took less than 2s
+		assertTrue(executionTime < 2);
 	}
 	
 	static URL getNginxFileUrl (String filePath) throws MalformedURLException {
