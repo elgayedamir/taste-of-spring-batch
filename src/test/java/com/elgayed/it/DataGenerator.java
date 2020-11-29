@@ -30,7 +30,7 @@ public class DataGenerator {
 	
 	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	
-	public static final String SPEECHS_CSV_RAW_FORMAT = "%s, %s, %s, %s\n";
+	public static final String SPEECHES_CSV_RAW_FORMAT = "%s, %s, %s, %s\n";
 	
 	/**
 	 * Generates a random {@link Date} between 2011-01-01 and 2014-12-31
@@ -75,7 +75,7 @@ public class DataGenerator {
 			Stream<Speech> stream = Stream.generate(SPEECH_SUPPLIER);
 			
 			//Append columns header to CSV file
-			out.write(String.format(SPEECHS_CSV_RAW_FORMAT, 
+			out.write(String.format(SPEECHES_CSV_RAW_FORMAT, 
 					SpeechRecordConstants.SPEAKER_COLUMN_NAME,
 					SpeechRecordConstants.SPEECH_THEME_COLUMN_NAME,
 					SpeechRecordConstants.SPEECH_DATE_COLUMN_NAME,
@@ -83,7 +83,7 @@ public class DataGenerator {
 			
 			stream.limit(10000).forEach(speech -> {
 					try {
-						out.write(String.format(SPEECHS_CSV_RAW_FORMAT, speech.getSpeaker(), speech.getTheme(), DATE_FORMAT.format(speech.getDate()),
+						out.write(String.format(SPEECHES_CSV_RAW_FORMAT, speech.getSpeaker(), speech.getTheme(), DATE_FORMAT.format(speech.getDate()),
 								speech.getWords()).getBytes());
 					} catch (IOException e) {
 						e.printStackTrace();
