@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 import java.util.Set;
@@ -14,6 +15,7 @@ import java.util.stream.Stream;
 import org.testcontainers.shaded.org.apache.commons.io.FileUtils;
 
 import com.elgayed.model.Speech;
+import com.elgayed.processing.SpeechRecordConstants;
 
 /**
  * Utility class for generating political speeches large CSV file to be used for testing 
@@ -28,9 +30,17 @@ public class DataGenerator {
 	
 	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	
+	public static final String SPEECHS_CSV_RAW_FORMAT = "%s, %s, %s, %s\n";
+	
+	/**
+	 * Generates a random {@link Date} between 2011-01-01 and 2014-12-31
+	 */
 	public static final Supplier<Date> DATE_SUPPLIER = () -> {
-		Date startDate = new Date(111, 1, 1);
-		Date endDate = new Date(114, 12, 31);
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(2011, 1, 1);
+		Date startDate = calendar.getTime();
+		calendar.set(2014, 12, 31);
+		Date endDate = calendar.getTime();
 		long startMillis = startDate.getTime();
 		long endMillis = endDate.getTime();
 		long randomMillisSinceEpoch = ThreadLocalRandom.current().nextLong(startMillis, endMillis);
@@ -63,12 +73,17 @@ public class DataGenerator {
 		
 		try (FileOutputStream out = new FileOutputStream(largeCsvFile);) {
 			Stream<Speech> stream = Stream.generate(SPEECH_SUPPLIER);
-
-			out.write("edner, Thema, Datum, Wörter\n".getBytes());
+			
+			//Append columns header to CSV file
+			out.write(String.format(SPEECHS_CSV_RAW_FORMAT, 
+					SpeechRecordConstants.SPEAKER_COLUMN_NAME,
+					SpeechRecordConstants.SPEECH_THEME_COLUMN_NAME,
+					SpeechRecordConstants.SPEECH_DATE_COLUMN_NAME,
+					SpeechRecordConstants.SPEECH_WORDS_COLUMN_NAME).getBytes());
 			
 			stream.limit(10000).forEach(speech -> {
 					try {
-						out.write(String.format("%s, %s, %s, %s\n", speech.getSpeaker(), speech.getTheme(), DATE_FORMAT.format(speech.getDate()),
+						out.write(String.format(SPEECHS_CSV_RAW_FORMAT, speech.getSpeaker(), speech.getTheme(), DATE_FORMAT.format(speech.getDate()),
 								speech.getWords()).getBytes());
 					} catch (IOException e) {
 						e.printStackTrace();
