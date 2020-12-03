@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import com.elgayed.model.Speech;
 import com.elgayed.model.StatisticsReport;
 import com.elgayed.statistics.StatisticsReportCollector;
-import com.elgayed.statistics.StatisticsReportConstants;
 
 @Service
 public class BatchProcessingService {
@@ -53,8 +52,6 @@ public class BatchProcessingService {
 		);
 		JobExecution jobExecution = jobLauncher.run(job, jobParams);
 		StatisticsReport statisticsReport = (StatisticsReport) jobExecution.getExecutionContext().get(StatisticReportWriter.STATISTIC_REPORT_KEY);
-		if (statisticsReport == null)
-			statisticsReport = new StatisticsReport(StatisticsReportConstants.NO_CLEAR_ANSWER, StatisticsReportConstants.NO_CLEAR_ANSWER, StatisticsReportConstants.NO_CLEAR_ANSWER);
 		return statisticsReport;
 	}
 }
