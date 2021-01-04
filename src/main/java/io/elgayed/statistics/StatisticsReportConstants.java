@@ -1,4 +1,4 @@
-package com.elgayed.statistics;
+package io.elgayed.statistics;
 
 /**
  * Constants for statistic report

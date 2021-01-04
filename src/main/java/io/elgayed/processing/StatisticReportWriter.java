@@ -1,4 +1,4 @@
-package com.elgayed.processing;
+package io.elgayed.processing;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;
 
-import com.elgayed.model.Speech;
-import com.elgayed.model.StatisticsReport;
-import com.elgayed.statistics.StatisticsReportCollector;
-import com.elgayed.statistics.StatisticsReportConstants;
+import io.elgayed.model.Speech;
+import io.elgayed.model.StatisticsReport;
+import io.elgayed.statistics.StatisticsReportCollector;
+import io.elgayed.statistics.StatisticsReportConstants;
 
 @Component
 @JobScope

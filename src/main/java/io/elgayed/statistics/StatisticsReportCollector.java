@@ -1,4 +1,4 @@
-package com.elgayed.statistics;
+package io.elgayed.statistics;
 
 import java.util.Set;
 import java.util.function.BiConsumer;
@@ -7,8 +7,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-import com.elgayed.model.Speech;
-import com.elgayed.model.StatisticsReport;
+import io.elgayed.model.Speech;
+import io.elgayed.model.StatisticsReport;
 
 /**
  * Collects statistics from a stream of speeches:

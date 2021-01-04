@@ -1,4 +1,4 @@
-package com.elgayed.model;
+package io.elgayed.model;
 
 import java.util.Date;
 

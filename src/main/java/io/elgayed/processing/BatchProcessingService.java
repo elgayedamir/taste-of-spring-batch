@@ -1,4 +1,4 @@
-package com.elgayed.processing;
+package io.elgayed.processing;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,9 +17,9 @@ import org.springframework.batch.item.file.MultiResourceItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.elgayed.model.Speech;
-import com.elgayed.model.StatisticsReport;
-import com.elgayed.statistics.StatisticsReportCollector;
+import io.elgayed.model.Speech;
+import io.elgayed.model.StatisticsReport;
+import io.elgayed.statistics.StatisticsReportCollector;
 
 @Service
 public class BatchProcessingService {

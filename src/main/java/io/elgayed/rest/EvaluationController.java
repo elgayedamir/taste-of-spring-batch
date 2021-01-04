@@ -1,4 +1,4 @@
-package com.elgayed.rest;
+package io.elgayed.rest;
 
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.elgayed.model.StatisticsReport;
-import com.elgayed.processing.BatchProcessingService;
+import io.elgayed.model.StatisticsReport;
+import io.elgayed.processing.BatchProcessingService;
 
 @RestController
 @RequestMapping(path = "evaluation")

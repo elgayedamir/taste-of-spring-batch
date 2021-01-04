@@ -1,4 +1,4 @@
-package com.elgayed;
+package io.elgayed;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

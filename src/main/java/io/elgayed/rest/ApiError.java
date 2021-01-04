@@ -1,4 +1,4 @@
-package com.elgayed.rest;
+package io.elgayed.rest;
 
 /**
  * This class serves as a DTO for errors returned by the REST API end-points 

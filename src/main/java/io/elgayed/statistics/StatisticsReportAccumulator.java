@@ -1,4 +1,4 @@
-package com.elgayed.statistics;
+package io.elgayed.statistics;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -8,8 +8,8 @@ import java.util.function.Function;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.elgayed.model.Speech;
-import com.elgayed.model.StatisticsReport;
+import io.elgayed.model.Speech;
+import io.elgayed.model.StatisticsReport;
 
 public class StatisticsReportAccumulator {
 	

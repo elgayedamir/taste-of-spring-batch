@@ -1,4 +1,4 @@
-package com.elgayed.processing;
+package io.elgayed.processing;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,7 +34,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.validation.BindException;
 
-import com.elgayed.model.Speech;
+import io.elgayed.model.Speech;
 
 @Configuration
 @EnableBatchProcessing

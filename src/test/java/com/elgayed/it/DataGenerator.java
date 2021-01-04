@@ -14,8 +14,8 @@ import java.util.stream.Stream;
 
 import org.testcontainers.shaded.org.apache.commons.io.FileUtils;
 
-import com.elgayed.model.Speech;
-import com.elgayed.processing.SpeechRecordConstants;
+import io.elgayed.model.Speech;
+import io.elgayed.processing.SpeechRecordConstants;
 
 /**
  * Utility class for generating political speeches large CSV file to be used for testing 
